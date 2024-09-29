@@ -23,9 +23,9 @@ export const votes = pgTable(
     uniqueVote: uniqueIndex("unique_vote_idx").on(
       table.userId,
       table.postId,
-      table.commentId
+      table.commentId,
     ),
-  })
+  }),
 );
 
 export const votesRelations = relations(votes, ({ one }) => ({

@@ -3,7 +3,7 @@
 import { bots, generateBotComment } from "@/bots";
 import { db } from "@/lib/db";
 import { posts, comments, users, votes } from "@/schema";
-import type { CommentWithAuthorAndReplies, VoteDirection } from "@/types";
+import type { CommentWithAuthorAndReplies } from "@/types";
 import { sql, eq, desc, and } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -20,7 +20,7 @@ export async function createBotComment() {
     const post = randomPost[0];
     const { content } = await generateBotComment(
       bot,
-      `Write a short comment on this Reddit post: "${post.title}"`
+      `Write a short comment on this Reddit post: "${post.title}"`,
     );
 
     await db.insert(comments).values({
@@ -90,7 +90,7 @@ export async function getCommentsWithReplies(postId: number) {
     .orderBy(desc(comments.createdAt));
 
   function buildCommentTree(
-    parentId: number | null
+    parentId: number | null,
   ): CommentWithAuthorAndReplies[] {
     return allComments
       .filter((c) => c.parentCommentId === parentId)
@@ -108,7 +108,7 @@ export async function getCommentsWithReplies(postId: number) {
 export async function addComment(
   postId: number,
   content: string,
-  authorId: number
+  authorId: number,
 ) {
   try {
     const [newComment] = await db

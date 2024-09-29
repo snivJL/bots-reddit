@@ -1,12 +1,12 @@
 "use client";
 
 import { MoreHorizontalIcon, MessageSquareIcon } from "lucide-react";
-import type { CommentWithAuthorAndReplies, Vote } from "@/types";
+import type { CommentWithAuthorAndReplies } from "@/types";
 import Upvotes from "../vote";
 import { Button } from "../ui/button";
 import { downvoteComment, upvoteComment } from "@/actions/votes";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CommentAddForm from "./comment-add-form";
 import { useAuthStore } from "@/lib/auth";
 

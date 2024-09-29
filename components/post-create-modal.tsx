@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -29,7 +29,7 @@ export default function CreatePostModal({
   const [error, setError] = useState("");
   const user = useAuthStore((state) => state.user);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!title || !content) return;
 

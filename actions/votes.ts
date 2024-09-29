@@ -32,7 +32,7 @@ const votables: Record<VotableType, Votable> = {
 export async function getExistingVote(
   userId: number,
   votableId: number,
-  votableType: VotableType
+  votableType: VotableType,
 ) {
   const [existingVote] = await db
     .select()
@@ -40,8 +40,8 @@ export async function getExistingVote(
     .where(
       and(
         eq(votes.userId, userId),
-        eq(votes[`${votableType}Id` as "commentId" | "postId"], votableId)
-      )
+        eq(votes[`${votableType}Id` as "commentId" | "postId"], votableId),
+      ),
     );
   return existingVote;
 }
@@ -58,7 +58,7 @@ async function insertVote(
   userId: number,
   votableId: number,
   votableType: VotableType,
-  value: number
+  value: number,
 ) {
   await db.insert(votes).values({
     userId,
@@ -70,7 +70,7 @@ async function insertVote(
 async function updateVotableUpvotes(
   votableId: number,
   voteChange: number,
-  votableType: VotableType
+  votableType: VotableType,
 ) {
   const votable = votables[votableType];
   const [updated] = await db
@@ -89,7 +89,7 @@ export async function vote(
   userId: number,
   votableId: number,
   votableType: VotableType,
-  direction: VoteDirection
+  direction: VoteDirection,
 ) {
   const existingVote = await getExistingVote(userId, votableId, votableType);
   const voteValue = direction === "up" ? 1 : -1;

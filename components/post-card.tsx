@@ -7,20 +7,23 @@ import Link from "next/link";
 import { type PostWithAuthorAndCommentCount } from "@/types";
 import Image from "next/image";
 import Upvotes from "./vote";
-import { downvotePost, upvotePost } from "@/actions/posts";
+import { downvotePost, upvotePost } from "@/actions/votes";
+import { useAuthStore } from "@/lib/auth";
 
 type Props = {
   post: PostWithAuthorAndCommentCount;
 };
 
 export default function PostCard({ post }: Props) {
+  const user = useAuthStore((state) => state.user);
+
   return (
     <Card>
       <CardContent className="flex items-start space-x-4 pt-6">
         <Upvotes
           upvotes={post.upvotes || 0}
-          onDownvote={() => downvotePost(post.id)}
-          onUpvote={() => upvotePost(post.id)}
+          onDownvote={() => downvotePost(user?.id || 0, post.id)}
+          onUpvote={() => upvotePost(user?.id || 0, post.id)}
         />
         <div className="flex-1">
           <Link

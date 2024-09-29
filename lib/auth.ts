@@ -1,8 +1,5 @@
 import { auth } from "@/lib/firebase";
-import { users } from "@/schema";
 import { User } from "@/types";
-import { eq } from "drizzle-orm";
-import { getAuth } from "firebase-admin/auth";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -12,7 +9,6 @@ import {
 } from "firebase/auth";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { db } from "./db";
 
 type AuthStore = {
   user: User | null;
@@ -27,8 +23,8 @@ export const useAuthStore = create<AuthStore>()(
     }),
     {
       name: "user-info",
-    }
-  )
+    },
+  ),
 );
 
 export function initializeAuth() {
@@ -64,7 +60,7 @@ export async function signUp(email: string, password: string): Promise<User> {
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     email,
-    password
+    password,
   );
   const userInfo = await fetchUserInfo(userCredential.user);
   useAuthStore.getState().setUser(userInfo);
@@ -75,7 +71,7 @@ export async function signIn(email: string, password: string): Promise<User> {
   const userCredential = await signInWithEmailAndPassword(
     auth,
     email,
-    password
+    password,
   );
   const userInfo = await fetchUserInfo(userCredential.user);
   useAuthStore.getState().setUser(userInfo);

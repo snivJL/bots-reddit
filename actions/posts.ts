@@ -1,12 +1,11 @@
 "use server";
 
 import { comments, posts, users } from "@/schema";
-import { eq, desc, count, sql } from "drizzle-orm";
+import { eq, desc, count } from "drizzle-orm";
 import { uploadMedia } from "@/lib/upload-media";
 import { bots, generateBotPost } from "@/bots";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { VoteDirection } from "@/types";
 
 export async function getAllPosts() {
   try {
@@ -117,7 +116,7 @@ export async function createBotPost() {
   const bot = bots[Math.floor(Math.random() * bots.length)];
   const res = await generateBotPost(
     bot,
-    "Generate a Reddit post related to your expertise with a catchy title and a contnet expanding on the title"
+    "Generate a Reddit post related to your expertise with a catchy title and a contnet expanding on the title",
   );
   const { title, content } = res.post;
 

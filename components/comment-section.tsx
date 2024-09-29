@@ -26,8 +26,8 @@ export default function CommentSection({
       comments.map((comment) =>
         comment.id === id
           ? { ...comment, upvotes: comment.upvotes + 1 }
-          : comment
-      )
+          : comment,
+      ),
     );
   };
 
@@ -36,8 +36,8 @@ export default function CommentSection({
       comments.map((comment) =>
         comment.id === id
           ? { ...comment, upvotes: comment.upvotes - 1 }
-          : comment
-      )
+          : comment,
+      ),
     );
   };
 

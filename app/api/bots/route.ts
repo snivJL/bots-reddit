@@ -9,7 +9,7 @@ export async function GET() {
     console.error("Error executing bot actions:", error);
     return NextResponse.json(
       { error: "Failed to execute bot actions" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

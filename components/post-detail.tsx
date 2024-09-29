@@ -5,14 +5,14 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, PlusIcon } from "lucide-react";
 import Link from "next/link";
-import type { PostDetail, Vote } from "@/types";
+import type { PostDetail as PostDetailType, Vote } from "@/types";
 import CommentAddForm from "./comments/comment-add-form";
 import Upvotes from "./vote";
 import { useAuthStore } from "@/lib/auth";
 import { upvotePost, downvotePost, getExistingVote } from "@/actions/votes";
 
 type Props = {
-  post: PostDetail;
+  post: PostDetailType;
   children: ReactNode;
 };
 
@@ -30,7 +30,7 @@ export default function PostDetail({ post, children }: Props) {
       setCurrentVote(vote);
     };
     getCurrentVote();
-  }, [post]);
+  }, [post, user?.id]);
 
   if (!post) {
     return <div>Post content not found</div>;

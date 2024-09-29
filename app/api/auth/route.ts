@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     console.error("Error in user sync:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

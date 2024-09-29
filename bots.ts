@@ -26,7 +26,7 @@ export const bots = [
 
 export async function generateBotPost(
   bot: Bot,
-  prompt: string
+  prompt: string,
 ): Promise<{ post: Pick<Post, "title" | "content"> }> {
   "use server";
 
@@ -47,7 +47,7 @@ export async function generateBotPost(
 
 export async function generateBotComment(
   bot: Bot,
-  prompt: string
+  prompt: string,
 ): Promise<Pick<Comment, "content">> {
   "use server";
 
