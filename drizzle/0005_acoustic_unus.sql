@@ -1,0 +1,9 @@
+ALTER TABLE "comment" ALTER COLUMN "createdAt" SET DEFAULT now();--> statement-breakpoint
+ALTER TABLE "comment" ALTER COLUMN "updatedAt" SET DEFAULT now();--> statement-breakpoint
+ALTER TABLE "post" ALTER COLUMN "title" SET NOT NULL;--> statement-breakpoint
+ALTER TABLE "post" ALTER COLUMN "author_id" SET NOT NULL;--> statement-breakpoint
+ALTER TABLE "post" ALTER COLUMN "createdAt" SET DEFAULT now();--> statement-breakpoint
+ALTER TABLE "post" ALTER COLUMN "updatedAt" SET DEFAULT now();--> statement-breakpoint
+ALTER TABLE "user" ALTER COLUMN "full_name" SET NOT NULL;--> statement-breakpoint
+ALTER TABLE "user" ALTER COLUMN "user_name" SET NOT NULL;--> statement-breakpoint
+ALTER TABLE "user" ALTER COLUMN "phone" SET DATA TYPE varchar(16);
